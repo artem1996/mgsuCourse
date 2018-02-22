@@ -3,4 +3,4 @@ project(mgsuCourse)
 
 set(CMAKE_CXX_STANDARD 11)
 
-add_executable(mgsuCourse main.cpp matrix.cpp matrix.h)
+add_executable(mgsuCourse main.cpp Matrix.cpp Matrix.h)
