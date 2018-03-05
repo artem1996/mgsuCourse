@@ -8,7 +8,7 @@
 #include <ostream>
 
 class Point {
-private:
+public:
     int column;
     int value;
     Point* next;

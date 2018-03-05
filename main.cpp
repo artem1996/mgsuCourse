@@ -15,6 +15,9 @@ int main() {
     ofstream compressedFile("compress.csv");
     compressedFile << *matrix;
     compressedFile.close();
+    ifstream compr("compress.csv");
+    Matrix* inpMatr = new Matrix();
+    compr >> *inpMatr;
 //    int temp;
 //    int strNumber = 1;
 //    while (!inputFile.eof()) {

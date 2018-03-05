@@ -86,8 +86,13 @@ std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
         os << *tempRow;
         tempRow = tempRow->getNext();
     }
-    os << "0:0;";
+    os << "0 0\n";
     return os;
+}
+
+std::istream &operator>>(std::istream &is, const Matrix &matrix) {
+    Row* row = new Row(0);
+    is >> *row;
 }
 
 int Row::getNumber() {
@@ -171,13 +176,19 @@ int Row::getMaxColumn() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Row &row) {
-    os << "0:" << row.rowNumber + 1 << ";";
+    os << "0 " << row.rowNumber + 1 << "\n";
     Point* tempPoint = row.firstPoint;
     while (tempPoint != nullptr) {
         os << *tempPoint;
         tempPoint = tempPoint->getNext();
     }
     return os;
+}
+
+std::istream &operator>>(std::istream &is, const Row &row) {
+    Point* point = new Point(0);
+    is >> *point;
+    return is;
 }
 
 int Point::getColumn() const {
@@ -219,13 +230,13 @@ int Point::getMaxColumn() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Point &point) {
-    os << point.column + 1 << ":" << point.value << ";";
+    os << point.column + 1 << " " << point.value << "\n";
     return os;
 }
 
 std::istream &operator>>(std::istream &is, const Point &point) {
-    is.ignore(':');
-    is.ignore(';');
-    is >> point.column >> point.value;
+    int a;
+    int b;
+    is >> a >> b;
     return is;
 }
