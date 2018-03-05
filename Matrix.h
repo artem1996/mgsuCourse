@@ -24,14 +24,15 @@ public:
     int getMaxColumn();
 
     virtual ~Point();
-
-    friend std::ostream &operator<<(std::ostream &os, const Point &point);
-    friend std::istream &operator>>(std::istream &is, const Point &point);
 };
 
 class Row {
     int rowNumber;
     Point* firstPoint;
+public:
+    Point *getFirstPoint() const;
+
+private:
     Row* next;
 public:
     Row(int rowNumber);
@@ -47,15 +48,16 @@ public:
     Row* getNext();
 
     virtual ~Row();
-
-    friend std::ostream &operator<<(std::ostream &os, const Row &row);
-    friend std::istream &operator>>(std::istream &is, const Row &row);
 };
 
 class Matrix {
 public:
+    int columns;
+    Matrix(int columns);
+
+public:
     Row* firstRow;
-    Matrix();
+//    Matrix(int rows, int columns);
 
     int get(int row, int column);
     void set(int row, int column, int value);
@@ -65,7 +67,7 @@ public:
     virtual ~Matrix();
 
     friend std::ostream &operator<<(std::ostream &os, const Matrix &matrix);
-    friend std::istream &operator>>(std::istream &is, const Matrix &matrix);
+    friend std::istream &operator>>(std::istream &is, Matrix &matrix);
 };
 
 

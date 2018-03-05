@@ -16,8 +16,9 @@ int main() {
     compressedFile << *matrix;
     compressedFile.close();
     ifstream compr("compress.csv");
-    Matrix* inpMatr = new Matrix();
+    Matrix* inpMatr = new Matrix(100);
     compr >> *inpMatr;
+    inpMatr->get(0,0);
 //    int temp;
 //    int strNumber = 1;
 //    while (!inputFile.eof()) {
@@ -44,7 +45,7 @@ int main() {
 }
 
 Matrix* matrixGenerator(ostream& stream, int resolution, int probability, int maxValue) {
-    Matrix* matrix = new Matrix;
+    Matrix* matrix = new Matrix(resolution);
     maxValue += 1;
     srand(static_cast<unsigned int>(time(nullptr)));
     for(int i = 0; i < resolution; i++) {

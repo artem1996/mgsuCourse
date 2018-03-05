@@ -51,10 +51,6 @@ void Matrix::set(int rowNumber, int columnNumber, int value) {
     }
 }
 
-Matrix::Matrix() {
-    firstRow = nullptr;
-}
-
 Matrix::~Matrix() {
     if(firstRow != nullptr)
         delete(firstRow);
@@ -81,19 +77,51 @@ int Matrix::getMaxColumn() {
 }
 
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
+    os << matrix.columns << std::endl;
     Row* tempRow = matrix.firstRow;
     while (tempRow != nullptr) {
-        os << *tempRow;
+        int additionalCoefficient = tempRow->getNumber() * matrix.columns;
+        Point* tempPoint = tempRow->getFirstPoint();
+        while (tempPoint != nullptr) {
+            os << " " << additionalCoefficient + tempPoint->getColumn();
+            tempPoint = tempPoint->getNext();
+        }
         tempRow = tempRow->getNext();
     }
-    os << "0 0\n";
+    os << std::endl;
+    tempRow = matrix.firstRow;
+    while (tempRow != nullptr) {
+        Point* tempPoint = tempRow->getFirstPoint();
+        while (tempPoint != nullptr) {
+            os << " " << tempPoint->getValue();
+            tempPoint = tempPoint->getNext();
+        }
+        tempRow = tempRow->getNext();
+    }
     return os;
 }
 
-std::istream &operator>>(std::istream &is, const Matrix &matrix) {
-    Row* row = new Row(0);
-    is >> *row;
+std::istream &operator>>(std::istream &is, Matrix &matrix) {
+    is >> matrix.columns;
+    do {
+        int tempValue;
+        is >> tempValue;
+        matrix.set(tempValue / matrix.columns, tempValue % matrix.columns, 1);
+    } while (is.get() != '\n');
+    Row* tempRow = matrix.firstRow;
+    Point* tempPoint = tempRow->getFirstPoint();
+    do {
+        is >> tempPoint->value;
+        tempPoint = tempPoint->getNext();
+        if(tempPoint == nullptr) {
+            tempRow = tempRow->getNext();
+            if(tempRow != nullptr)
+                tempPoint = tempRow->getFirstPoint();
+        }
+    } while (!is.eof());
 }
+
+Matrix::Matrix(int columns) : columns(columns), firstRow(nullptr) {}
 
 int Row::getNumber() {
     return rowNumber;
@@ -175,20 +203,8 @@ int Row::getMaxColumn() {
     return firstPoint->getMaxColumn();
 }
 
-std::ostream &operator<<(std::ostream &os, const Row &row) {
-    os << "0 " << row.rowNumber + 1 << "\n";
-    Point* tempPoint = row.firstPoint;
-    while (tempPoint != nullptr) {
-        os << *tempPoint;
-        tempPoint = tempPoint->getNext();
-    }
-    return os;
-}
-
-std::istream &operator>>(std::istream &is, const Row &row) {
-    Point* point = new Point(0);
-    is >> *point;
-    return is;
+Point *Row::getFirstPoint() const {
+    return firstPoint;
 }
 
 int Point::getColumn() const {
@@ -227,16 +243,4 @@ int Point::getMaxColumn() {
         return column;
     else
         return next->getMaxColumn();
-}
-
-std::ostream &operator<<(std::ostream &os, const Point &point) {
-    os << point.column + 1 << " " << point.value << "\n";
-    return os;
-}
-
-std::istream &operator>>(std::istream &is, const Point &point) {
-    int a;
-    int b;
-    is >> a >> b;
-    return is;
 }
