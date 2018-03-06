@@ -21,7 +21,6 @@ public:
     int getColumn() const;
     int getValue() const;
     Point *getNext() const;
-    int getMaxColumn();
 
     virtual ~Point();
 };
@@ -43,8 +42,6 @@ public:
 public:
     int getNumber();
     int getColumn(int columnNumber);
-    int getMaxRow();
-    int getMaxColumn();
     Row* getNext();
 
     virtual ~Row();
@@ -61,8 +58,6 @@ public:
 
     int get(int row, int column);
     void set(int row, int column, int value);
-    int getMaxRow();
-    int getMaxColumn();
 
     virtual ~Matrix();
 

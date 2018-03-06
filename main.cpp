@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 #include "Matrix.h"
 
 using namespace std;
@@ -19,28 +20,6 @@ int main() {
     Matrix* inpMatr = new Matrix(100);
     compr >> *inpMatr;
     inpMatr->get(0,0);
-//    int temp;
-//    int strNumber = 1;
-//    while (!inputFile.eof()) {
-//        int colNumber = 1;
-//        string str;
-//        getline(inputFile, str);
-//        istringstream strin(str);
-//        bool isStrDefined = false;
-//        while (strin >> temp) {
-//            if (temp > 0) {
-//                if(!isStrDefined) {
-//                    compressedFile << 0 << ':' << strNumber << ';';
-//                    isStrDefined = true;
-//                }
-//                compressedFile << temp << ':' << colNumber << ';';
-//            }
-//            colNumber++;
-//        }
-//        strNumber++;
-//    }
-//    compressedFile << "0:0;";
-//    compressedFile.close();
     return 0;
 }
 
