@@ -18,28 +18,6 @@ int main() {
     ifstream compr("compress.csv");
     Matrix* inpMatr = new Matrix();
     compr >> *inpMatr;
-//    int temp;
-//    int strNumber = 1;
-//    while (!inputFile.eof()) {
-//        int colNumber = 1;
-//        string str;
-//        getline(inputFile, str);
-//        istringstream strin(str);
-//        bool isStrDefined = false;
-//        while (strin >> temp) {
-//            if (temp > 0) {
-//                if(!isStrDefined) {
-//                    compressedFile << 0 << ':' << strNumber << ';';
-//                    isStrDefined = true;
-//                }
-//                compressedFile << temp << ':' << colNumber << ';';
-//            }
-//            colNumber++;
-//        }
-//        strNumber++;
-//    }
-//    compressedFile << "0:0;";
-//    compressedFile.close();
     return 0;
 }
 

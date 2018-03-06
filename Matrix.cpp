@@ -60,26 +60,6 @@ Matrix::~Matrix() {
         delete(firstRow);
 }
 
-int Matrix::getMaxRow() {
-    if(firstRow == nullptr)
-        return 0;
-    else
-        return firstRow->getMaxRow();
-}
-
-int Matrix::getMaxColumn() {
-    if(firstRow == nullptr)
-        return 0;
-    int maxColumn = 0;
-    Row* tempRow = firstRow;
-    while (tempRow->getNext() != nullptr) {
-        int tempColumn = tempRow->getMaxColumn();
-        if(tempColumn > maxColumn)
-            maxColumn = tempColumn;
-    }
-    return maxColumn;
-}
-
 std::ostream &operator<<(std::ostream &os, const Matrix &matrix) {
     Row* tempRow = matrix.firstRow;
     while (tempRow != nullptr) {
@@ -164,17 +144,6 @@ Row::~Row() {
         delete(next);
 }
 
-int Row::getMaxRow() {
-    if(next == nullptr)
-        return rowNumber;
-    else
-        next->getMaxRow();
-}
-
-int Row::getMaxColumn() {
-    return firstPoint->getMaxColumn();
-}
-
 std::ostream &operator<<(std::ostream &os, const Row &row) {
     os << "0 " << row.rowNumber + 1 << "\n";
     Point* tempPoint = row.firstPoint;
@@ -220,13 +189,6 @@ Point::Point(int columnNumber) {
 Point::~Point() {
     if(next != nullptr)
         delete(next);
-}
-
-int Point::getMaxColumn() {
-    if(next == nullptr)
-        return column;
-    else
-        return next->getMaxColumn();
 }
 
 std::ostream &operator<<(std::ostream &os, const Point &point) {
