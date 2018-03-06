@@ -42,6 +42,7 @@ void Matrix::set(int rowNumber, int columnNumber, int value) {
                 } else {
                     prevRow->setNext(tempRow->getNext());
                 }
+                tempRow->next = nullptr;
                 delete(tempRow);
             }
             return;
@@ -120,6 +121,7 @@ bool Row::setColumn(int columnNumber, int value) {
                     prevPoint->setNext(tempPoint->getNext());
                 else
                     firstPoint = tempPoint->getNext();
+                tempPoint->next = nullptr;
                 delete(tempPoint);
                 return (firstPoint != nullptr);
             } else {

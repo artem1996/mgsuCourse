@@ -29,6 +29,7 @@ public:
 };
 
 class Row {
+public:
     int rowNumber;
     Point* firstPoint;
     Row* next;

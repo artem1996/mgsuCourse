@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <time.h>
 #include "Matrix.h"
 
 using namespace std;
@@ -9,8 +10,7 @@ Matrix * matrixGenerator(ostream& stream, int resolution, int probability, int m
 
 int main() {
     ofstream outputFile("fileOut.csv");
-    Matrix* matrix = matrixGenerator((ostream&) outputFile, 100, 100, 5);
-//    outputFile << "Hello, Word!" << std::endl;
+    Matrix* matrix = matrixGenerator((ostream&) outputFile, 10, 6, 5);
     outputFile.close();
     ofstream compressedFile("compress.csv");
     compressedFile << *matrix;
